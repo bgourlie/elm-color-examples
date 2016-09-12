@@ -1,11 +1,15 @@
 module Main exposing (..)
 
-import Html exposing (Html, Attribute, div, text, input, button, label)
+import Html exposing (Html, Attribute, div, text, input, button, label, p)
 import Html.App as App
 import Html.Attributes as Attrs exposing (style, type', value, min, max)
 import Color exposing (Color, toRgb)
 import Json.Decode as Json
 import ColorPicker exposing (colorPicker)
+import ColorBox exposing (colorBox)
+import Slider exposing (slider)
+import Util exposing (stringToInt)
+import Color.Manipulate exposing (weightedMix)
 
 
 main =
@@ -22,14 +26,15 @@ main =
 
 
 type alias Model =
-    { inputColor1 : Color
-    , inputColor2 : Color
+    { mixInputColor1 : Color
+    , mixInputColor2 : Color
+    , mixInputWeight : Int
     }
 
 
 init : ( Model, Cmd AppMessage )
 init =
-    ( { inputColor1 = Color.darkBlue, inputColor2 = Color.purple }, Cmd.none )
+    ( { mixInputColor1 = Color.darkBlue, mixInputColor2 = Color.purple, mixInputWeight = 50 }, Cmd.none )
 
 
 
@@ -39,6 +44,7 @@ init =
 type AppMessage
     = InputColor1Changed Color
     | InputColor2Changed Color
+    | InputWeightChanged Int
     | NoOp
 
 
@@ -46,10 +52,13 @@ update : AppMessage -> Model -> ( Model, Cmd AppMessage )
 update msg model =
     case msg of
         InputColor1Changed color ->
-            ( { model | inputColor1 = color }, Cmd.none )
+            ( { model | mixInputColor1 = color }, Cmd.none )
 
         InputColor2Changed color ->
-            ( { model | inputColor2 = color }, Cmd.none )
+            ( { model | mixInputColor2 = color }, Cmd.none )
+
+        InputWeightChanged weight ->
+            ( { model | mixInputWeight = weight }, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )
@@ -67,6 +76,12 @@ subscriptions model =
 view : Model -> Html AppMessage
 view model =
     div []
-        [ colorPicker InputColor1Changed model.inputColor1
-        , colorPicker InputColor2Changed model.inputColor2
+        [ p [] [ text "Color One" ]
+        , colorPicker InputColor1Changed model.mixInputColor1
+        , p [] [ text "Color Two" ]
+        , colorPicker InputColor2Changed model.mixInputColor2
+        , p [] [ text "Scale" ]
+        , slider (\v -> InputWeightChanged (stringToInt 0 v)) 0 100 model.mixInputWeight
+        , p [] [ text "Mixed" ]
+        , colorBox <| weightedMix model.mixInputColor1 model.mixInputColor2 ((toFloat model.mixInputWeight) / 100)
         ]
