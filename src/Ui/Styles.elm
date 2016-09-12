@@ -1,43 +1,62 @@
-module Ui.Styles exposing (..)
+module Ui.Styles exposing (class, styles, css, colorDisplayInlineStyles, CssClasses(ColorPicker, ColorBox, Checkerboard, ColorDisplay))
 
 import Html.Attributes
 import Color
 import Css exposing (..)
+import Css.Elements exposing (body, li)
+import Css.Namespace exposing (namespace)
+import Html.CssHelpers
 
 
-colorPickerStyles : List Mixin
-colorPickerStyles =
-    [ padding <| px 10 ]
+myNamespace =
+    "elmColorExamples"
 
 
-colorBoxStyles : List Mixin
-colorBoxStyles =
-    [ width <| px 100
-    , height <| px 100
-    , position relative
-    ]
+{ id, class, classList } =
+    Html.CssHelpers.withNamespace myNamespace
+type CssClasses
+    = ColorPicker
+    | ColorBox
+    | ColorDisplay
+    | Checkerboard
 
 
-colorDisplayStyles : Color.Color -> List Mixin
-colorDisplayStyles color =
+checkerboardData =
+    "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJUlEQVQYV2NkYGD4z4AJGNGFQAJDQSEWv2C6G8N3UF0YHhxAhQBLjgoGdiBmhAAAAABJRU5ErkJggg==) repeat"
+
+
+css =
+    (stylesheet << namespace myNamespace)
+        [ body []
+        , (.) ColorPicker [ padding <| px 10 ]
+        , (.) ColorBox
+            [ width <| px 100
+            , height <| px 100
+            , position relative
+            , children
+                [ (.) Checkerboard
+                    [ width <| pct 100
+                    , height <| pct 100
+                    , property "background" checkerboardData
+                    , position absolute
+                    ]
+                , (.) ColorDisplay
+                    [ width <| pct 100
+                    , height <| pct 100
+                    , position absolute
+                    ]
+                ]
+            ]
+        ]
+
+
+colorDisplayInlineStyles : Color.Color -> List Mixin
+colorDisplayInlineStyles color =
     let
         { red, green, blue, alpha } =
             Color.toRgb color
     in
-        [ height <| pct 100
-        , width <| pct 100
-        , backgroundColor <| rgba red green blue alpha
-        , position absolute
-        ]
-
-
-checkerboardStyles : List Mixin
-checkerboardStyles =
-    [ width <| pct 100
-    , height <| pct 100
-    , property "background" "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJUlEQVQYV2NkYGD4z4AJGNGFQAJDQSEWv2C6G8N3UF0YHhxAhQBLjgoGdiBmhAAAAABJRU5ErkJggg==) repeat"
-    , position absolute
-    ]
+        [ backgroundColor <| rgba red green blue alpha ]
 
 
 styles =
