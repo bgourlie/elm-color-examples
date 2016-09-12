@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './index.js',
 
   output: {
     path: './dist',
@@ -20,13 +20,18 @@ module.exports = {
       },
       {
         test: /\.elm$/,
-        exclude: [/elm-stuff/, /node_modules/],
-        loader: '../index.js'
+        exclude: [/elm-stuff/, /node_modules/, /Stylesheets.elm/],
+        loader: 'elm-webpack'
+      },
+      {
+        test: /src\/Stylesheets.elm$/,
+        loader: "style!css!elm-css-webpack"
       }
     ],
-
-    noParse: /\.elm$/
+    noParse: [/.elm$/]
   },
+
+  target: 'web',
 
   devServer: {
     inline: true,
