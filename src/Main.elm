@@ -5,10 +5,10 @@ import Html.App as App
 import Html.Attributes as Attrs exposing (style, type', value, min, max)
 import Color exposing (Color, toRgb)
 import Json.Decode as Json
-import ColorPicker exposing (colorPicker)
-import ColorBox exposing (colorBox)
-import Slider exposing (slider)
-import Util exposing (stringToInt)
+import Ui.ColorPicker exposing (colorPicker)
+import Ui.ColorBox exposing (colorBox)
+import Ui.Slider exposing (slider)
+import Ui.Util exposing (stringToInt)
 import Color.Manipulate exposing (weightedMix)
 
 

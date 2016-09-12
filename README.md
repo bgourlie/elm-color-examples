@@ -9,6 +9,8 @@ their own model and update functions.
 
     git clone https://github.com/bgourlie/elm-color-examples.git
     cd elm-color-examples
-    elm-reactor
+    npm install
+    elm-make
+    npm run dev
     
-Then navigate your browser to `http://localhost:8000/Main.elm`.
+Then navigate your browser to `http://localhost:3000`.

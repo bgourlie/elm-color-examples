@@ -1,9 +1,9 @@
-module ColorBox exposing (colorBox)
+module Ui.ColorBox exposing (colorBox)
 
 import Html exposing (Html, div)
 import Color exposing (toRgb)
 import Html.Attributes
-import Styles exposing (styles, colorBoxStyles, checkerboardStyles, colorDisplayStyles)
+import Ui.Styles exposing (styles, colorBoxStyles, checkerboardStyles, colorDisplayStyles)
 
 
 colorBox : Color.Color -> Html msg

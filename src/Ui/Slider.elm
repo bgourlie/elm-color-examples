@@ -1,4 +1,4 @@
-module Slider exposing (slider)
+module Ui.Slider exposing (slider)
 
 import Html exposing (Html, div, input, text)
 import Html.Attributes as Attr exposing (type', value, min, max)

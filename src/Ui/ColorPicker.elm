@@ -1,12 +1,12 @@
-module ColorPicker exposing (colorPicker)
+module Ui.ColorPicker exposing (colorPicker)
 
 import String
-import ColorBox exposing (colorBox)
+import Ui.ColorBox exposing (colorBox)
 import Html exposing (Html, Attribute, div, text, input, button, label)
 import Color exposing (Color, toRgb, rgba)
-import Styles exposing (styles, colorPickerStyles)
-import Slider exposing (slider)
-import Util exposing (stringToInt)
+import Ui.Styles exposing (styles, colorPickerStyles)
+import Ui.Slider exposing (slider)
+import Ui.Util exposing (stringToInt)
 
 
 colorPicker : (Color -> msg) -> Color -> Html msg

@@ -1,4 +1,4 @@
-module Styles exposing (..)
+module Ui.Styles exposing (..)
 
 import Html.Attributes
 import Color

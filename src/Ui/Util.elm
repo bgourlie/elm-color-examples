@@ -1,4 +1,4 @@
-module Util exposing (..)
+module Ui.Util exposing (..)
 
 import String
 
