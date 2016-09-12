@@ -1,10 +1,10 @@
 module Ui.ColorPicker exposing (colorPicker)
 
 import String
-import Ui.ColorBox exposing (colorBox)
-import Html exposing (Html, Attribute, div, text, input, button, label)
 import Color exposing (Color, toRgb, rgba)
-import Ui.Styles exposing (styles, colorPickerStyles)
+import Html exposing (Html, Attribute, div, text, input, button, label)
+import Ui.ColorBox exposing (colorBox)
+import Ui.Styles exposing (class, styles, CssClasses(ColorPicker))
 import Ui.Slider exposing (slider)
 import Ui.Util exposing (stringToInt, percentToFloat)
 
@@ -15,7 +15,7 @@ colorPicker msg curColor =
         { red, green, blue, alpha } =
             toRgb curColor
     in
-        div [ styles colorPickerStyles ]
+        div [ class [ ColorPicker ] ]
             [ colorBox curColor
             , slider (redUpdated msg curColor) 0 255 red
             , slider (greenUpdated msg curColor) 0 255 green
