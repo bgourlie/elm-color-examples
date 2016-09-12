@@ -10,7 +10,7 @@ their own model and update functions.
     git clone https://github.com/bgourlie/elm-color-examples.git
     cd elm-color-examples
     npm install
-    elm-make
+    elm-package install
     npm run dev
     
-Then navigate your browser to `http://localhost:3000`.
+Then navigate your browser to `http://localhost:3001`.

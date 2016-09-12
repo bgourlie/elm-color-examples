@@ -1,14 +1,12 @@
 module Main exposing (..)
 
-import Html exposing (Html, Attribute, div, text, input, button, label, p)
+import Html exposing (Html, div, text, p)
 import Html.App as App
-import Html.Attributes as Attrs exposing (style, type', value, min, max)
 import Color exposing (Color, toRgb)
-import Json.Decode as Json
 import Ui.ColorPicker exposing (colorPicker)
 import Ui.ColorBox exposing (colorBox)
 import Ui.Slider exposing (slider)
-import Ui.Util exposing (stringToInt)
+import Ui.Util exposing (stringToInt, percentToFloat)
 import Color.Manipulate exposing (weightedMix)
 
 
@@ -83,5 +81,5 @@ view model =
         , p [] [ text "Scale" ]
         , slider (\v -> InputWeightChanged (stringToInt 0 v)) 0 100 model.mixInputWeight
         , p [] [ text "Mixed" ]
-        , colorBox <| weightedMix model.mixInputColor1 model.mixInputColor2 ((toFloat model.mixInputWeight) / 100)
+        , colorBox <| weightedMix model.mixInputColor1 model.mixInputColor2 (percentToFloat model.mixInputWeight)
         ]

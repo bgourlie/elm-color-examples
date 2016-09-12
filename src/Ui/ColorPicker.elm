@@ -6,7 +6,7 @@ import Html exposing (Html, Attribute, div, text, input, button, label)
 import Color exposing (Color, toRgb, rgba)
 import Ui.Styles exposing (styles, colorPickerStyles)
 import Ui.Slider exposing (slider)
-import Ui.Util exposing (stringToInt)
+import Ui.Util exposing (stringToInt, percentToFloat)
 
 
 colorPicker : (Color -> msg) -> Color -> Html msg
@@ -69,4 +69,4 @@ alphaUpdated msg curColor v =
         newAlpha =
             stringToInt 0 v
     in
-        msg <| rgba curRgb.red curRgb.green curRgb.blue ((toFloat newAlpha) / 100)
+        msg <| rgba curRgb.red curRgb.green curRgb.blue (percentToFloat newAlpha)
